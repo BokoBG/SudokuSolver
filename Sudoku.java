@@ -26,10 +26,16 @@ public class Sudoku
     public static SudokuBox [][] readFile (File fileName) throws FileNotFoundException
     {
         SudokuBox [][] board = new SudokuBox [9][9];
+        for (int row=0; row<9;row++)
+        {
+           for (int col=0; col<9;col++) 
+               board[row][col] = new SudokuBox(0);
+        }
         Scanner reader = new Scanner(fileName);
         
         int r = 0;
-        while (reader.hasNextLine())
+        int l = 1;
+        while (reader.hasNextLine() || l < 10)
         {
             String line = reader.nextLine();
             String [] numbers = line.split(",");
@@ -60,7 +66,7 @@ public class Sudoku
             {
                 board[r][c] = new SudokuBox(currentRow[c]);
             }
-            r++;    
+            r++;  l++;  
         }
         return board;
     }
